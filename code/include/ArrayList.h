@@ -19,3 +19,7 @@ void destroy(ArrayList*);
 int size(ArrayList*);
 //判断是否为空
 int isEmpty(ArrayList*);
+//返回对应索引的元素
+int at(ArrayList*, int);
+//返回元素第一次出现的索引
+int indexOf(ArrayList*, int);

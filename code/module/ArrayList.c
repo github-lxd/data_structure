@@ -62,3 +62,19 @@ int isEmpty(ArrayList* list) {
     return list->size == 0;
 }
 
+int at(ArrayList* list, int index) {
+    checkAddress(list);
+    return list->data[index];
+}
+
+int indexOf(ArrayList* list, int item) {
+    checkAddress(list);
+    int index = -1;
+    for (int i = 0; i < list->size; i++) {
+        if (list->data[i] == item) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
