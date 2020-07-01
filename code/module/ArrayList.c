@@ -78,3 +78,36 @@ int indexOf(ArrayList* list, int item) {
     }
     return index;
 }
+
+int pop(ArrayList* list) {
+    checkAddress(list);
+    int pop = list->data[--list->size];
+    list->data[list->size] = 0;
+    return pop;
+}
+
+void insert(ArrayList* list, int index, int item) {
+    checkAddress(list);
+    resize(list);
+    for (int i = list->size; i >= index; i++)
+        list->data[i + 1] = list->data[i];
+    list->data[index] = item;
+    list->size++;
+}
+
+void delete(ArrayList* list, int index) {
+    checkAddress(list);
+    for (int i = index; i < list->size - 1; i++)
+        list->data[i] = list->data[i + 1];
+    list->data[list->size - 1] = 0;
+    list->size--;
+}
+
+void _remove(ArrayList* list, int item) {
+    checkAddress(list);
+    for (int i = list->size; i >= 0; i--) {
+        if (list->data[i] == item) {
+            delete(list, i);
+        }
+    }
+}
