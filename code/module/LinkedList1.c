@@ -28,6 +28,7 @@ LinkedList1* newLinkedList1() {
     list->tail = tail;
     list->tail->data = 0;
     list->head->next = list->tail;
+    list->tail->next = NULL;
     return list;
 }
 
@@ -53,4 +54,81 @@ void display(LinkedList1* list) {
         printf("%d->", p->data);
     }
     printf("Tail\n");
+}
+
+int empty(LinkedList1* list) {
+    checkAddress(list);
+    return list->size == 0;
+}
+
+int at(LinkedList1* list, int index) {
+    checkAddress(list);
+    if (index >= size) {
+        printf("Out Of Index Exception\n");
+        exit(0);
+    }
+    Node *p = list->head->next;
+    for (int i = 0; i < index; i++)
+        p = p->next;
+    return p->data;
+}
+
+void pushFront(LinkedList1* list, int item) {
+    checkAddress(list);
+    Node *node = malloc(sizeof(Node));
+    checkAddress(node);
+    node->data = item;
+    node->next = list->head->next;
+    list->head->next = node;
+    list->size++;
+}
+
+void insert(LinkedList1* list, int index, int item) {
+    checkAddress(list);
+    if (index > list->size) {
+        printf("Out Of Index Exception");
+        exit(0);
+    }
+    Node *p = list->head;
+    for (int i = 0; i < index; i++) {
+        p = p->next;
+    }
+    Node *node = malloc(sizeof(Node));
+    checkAddress(node);
+    node->data = item;
+    node->next = p->next;
+    p->next = node;
+    list->size++;
+}
+
+void delete(LinkedList1* list, int index) {
+    checkAddress(list);
+    if (index >= list->size) {
+        printf("Out Of Index Exception");
+        exit(0);
+    }
+    Node *p = list->head;
+    for (int i = 0; i < index; i++) {
+        p = p->next;
+    }
+    Node *node = p->next;
+    p->next = node->next;
+    node->next = NULL;
+    list->size--;
+}
+
+void reverse(LinkedList1* list) {
+    checkAddress(list);
+    Node* p = list->head->next;
+    Node *q = p->next;
+    p->next = list->tail;
+    Node *r = NULL;
+    while (q->next != list->tail) {
+        r = q->next;
+        q->next = p;
+        p = q;
+        q = r;
+    }
+    q->next = p;
+    list->head->next = q;
 }
