@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/String.h"
+#include "include/Tree.h"
 
 int main() {
-    char *str = "aaaaaaae";
-    char *pat = "aaae";
-    int index = indexOf_KMP(str, pat);
-    printf("%d\n", index);
+    int queens[9] = {0};
+    trial(queens, 1);
     return 0;
 }
